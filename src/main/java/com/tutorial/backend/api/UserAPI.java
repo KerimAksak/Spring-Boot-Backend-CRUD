@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tutorial.backend.dto.UserCreateDTO;
 import com.tutorial.backend.dto.UserViewDTO;
 import com.tutorial.backend.service.UserService;
+import com.tutorial.backend.shared.GenericResponse;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import javassist.NotFoundException;
 
 @RestController
@@ -32,8 +34,9 @@ public class UserAPI {
 	}
 	
 	@PostMapping(path="/v1/createuser")
-	public ResponseEntity<?> createUser(@ResponseBody UserCreateDTO userCreateDTO){
-		return null;
+	public ResponseEntity<?> createUser(@RequestBody UserCreateDTO userCreateDTO){
+		userService.createUser(userCreateDTO);	
+		return ResponseEntity.ok(new GenericResponse("Registration Successful"));
 	}
 
 }
