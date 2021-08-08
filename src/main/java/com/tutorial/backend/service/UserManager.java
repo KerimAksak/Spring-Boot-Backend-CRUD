@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tutorial.backend.dto.UserCreateDTO;
+import com.tutorial.backend.dto.UserUpdateDTO;
 import com.tutorial.backend.dto.UserViewDTO;
 import com.tutorial.backend.model.User;
 import com.tutorial.backend.repository.UserRepository;
@@ -43,6 +44,16 @@ public class UserManager implements UserService {
 				.stream()
 				.map(user -> UserViewDTO.of(user))
 				.collect(Collectors.toList());
+	}
+	
+	@Override
+	public UserViewDTO updateUser(Long id, UserUpdateDTO userUpdateDTO) throws NotFoundException {
+		final User user = userRepository
+				.findById(id)
+				.orElseThrow(() -> new NotFoundException("Not Found!"));
+		user.setFirstName(userUpdateDTO.getFirstName());
+		user.setLastName(userUpdateDTO.getLastName());
+		return UserViewDTO.of(userRepository.save(user));
 	}
 	
 	
