@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,6 +50,11 @@ public class UserAPI {
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public ResponseEntity<List<UserViewDTO>> getAllUsers(){
 		return ResponseEntity.ok(userService.getAllUsers());
+	}
+
+	@PutMapping(path = "/v1/userUpdate/{id}")
+	public ResponseEntity<?> userUpdate(UserUpdateDTO userUpdateDTO){
+		return null;
 	}
 
 }
