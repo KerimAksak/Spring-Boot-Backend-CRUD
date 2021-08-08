@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tutorial.backend.dto.UserCreateDTO;
 import com.tutorial.backend.dto.UserUpdateDTO;
@@ -25,6 +27,7 @@ public class UserManager implements UserService {
 	}
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public UserViewDTO getUserById(Long id) throws NotFoundException {
 		final User user = userRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException("Not Found"));
@@ -39,6 +42,7 @@ public class UserManager implements UserService {
 	}
 
 	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<UserViewDTO> getAllUsers() {
 		return userRepository.findAll()
 				.stream()
@@ -47,6 +51,7 @@ public class UserManager implements UserService {
 	}
 	
 	@Override
+	@Transactional
 	public UserViewDTO updateUser(Long id, UserUpdateDTO userUpdateDTO) throws NotFoundException {
 		final User user = userRepository
 				.findById(id)
@@ -56,7 +61,14 @@ public class UserManager implements UserService {
 		return UserViewDTO.of(userRepository.save(user));
 	}
 	
-	
+	@Override
+	@Transactional
+	public void deleteUser(Long id) throws NotFoundException {
+		final User user = userRepository
+				.findById(id)
+				.orElseThrow(() -> new NotFoundException("Not Found User"));
+		userRepository.deleteById(user.getId());
+	}
 	
 
 }

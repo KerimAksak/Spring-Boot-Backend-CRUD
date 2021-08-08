@@ -16,4 +16,6 @@ public interface UserService {
 	List<UserViewDTO> getAllUsers();
 
 	UserViewDTO updateUser(Long id, UserUpdateDTO userUpdateDTO) throws NotFoundException;
+
+	void deleteUser(Long id) throws NotFoundException;
 }
