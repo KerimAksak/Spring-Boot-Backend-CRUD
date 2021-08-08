@@ -1,5 +1,8 @@
 package com.tutorial.backend.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +36,16 @@ public class UserManager implements UserService {
 				.save(new User(userCreateDTO.getFirstName(), userCreateDTO.getLastName()));
 		return UserViewDTO.of(user);
 	}
+
+	@Override
+	public List<UserViewDTO> getAllUsers() {
+		return userRepository.findAll()
+				.stream()
+				.map(user -> UserViewDTO.of(user))
+				.collect(Collectors.toList());
+	}
+	
+	
 	
 
 }
