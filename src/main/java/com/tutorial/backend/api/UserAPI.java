@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tutorial.backend.dto.UserCreateDTO;
+import com.tutorial.backend.dto.UserUpdateDTO;
 import com.tutorial.backend.dto.UserViewDTO;
 import com.tutorial.backend.service.UserService;
 import com.tutorial.backend.shared.GenericResponse;
@@ -53,8 +54,9 @@ public class UserAPI {
 	}
 
 	@PutMapping(path = "/v1/userUpdate/{id}")
-	public ResponseEntity<?> userUpdate(UserUpdateDTO userUpdateDTO){
-		return null;
+	public ResponseEntity<UserViewDTO> userUpdate(@PathVariable("id") Long id, 
+			@RequestBody UserUpdateDTO UserUpdateDTO){
+		return ResponseEntity.ok(userService.updateUser(id, UserUpdateDTO));
 	}
 
 }
