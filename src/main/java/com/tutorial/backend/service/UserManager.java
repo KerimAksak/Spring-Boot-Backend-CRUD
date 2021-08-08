@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,5 +71,11 @@ public class UserManager implements UserService {
 		userRepository.deleteById(user.getId());
 	}
 	
-
+	@Override
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+	public List<UserViewDTO> userSlice(Pageable pageable) {
+		return userRepository.findAll(pageable).stream()
+				.map(user -> UserViewDTO.of(user)).collect(Collectors.toList());
+	}
+	
 }
