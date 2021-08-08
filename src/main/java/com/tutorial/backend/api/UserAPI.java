@@ -1,5 +1,7 @@
 package com.tutorial.backend.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,9 +40,9 @@ public class UserAPI {
 		userService.createUser(userCreateDTO);	
 		return ResponseEntity.ok(new GenericResponse("Registration Successful"));
 	}
-	
+		
 	@GetMapping(path = "/v1/getAllUsers")
-	public ResponseEntity<?> getAllUsers(){
+	public ResponseEntity<List<UserViewDTO>> getAllUsers(){
 		return ResponseEntity.ok(userService.getAllUsers());
 	}
 
