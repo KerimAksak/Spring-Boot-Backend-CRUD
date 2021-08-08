@@ -3,6 +3,7 @@ package com.tutorial.backend.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,6 +60,12 @@ public class UserAPI {
 	public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) throws NotFoundException{
 		userService.deleteUser(id);
 		return ResponseEntity.ok(new GenericResponse("User Deleted!"));
+	}
+	
+	@GetMapping(path = "/v1/getUser/slice")
+	public ResponseEntity<List<UserViewDTO>> userSlice(Pageable pageable){
+		final List<UserViewDTO> users = userService.userSlice(pageable);
+		return ResponseEntity.ok(users);
 	}
 
 }
