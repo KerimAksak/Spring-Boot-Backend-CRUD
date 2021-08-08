@@ -38,5 +38,10 @@ public class UserAPI {
 		userService.createUser(userCreateDTO);	
 		return ResponseEntity.ok(new GenericResponse("Registration Successful"));
 	}
+	
+	@GetMapping(path = "/v1/getAllUsers")
+	public ResponseEntity<?> getAllUsers(){
+		return ResponseEntity.ok(userService.getAllUsers());
+	}
 
 }
