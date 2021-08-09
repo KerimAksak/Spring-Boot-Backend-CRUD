@@ -61,7 +61,9 @@ public class UserAPI {
 		userService.deleteUser(id);
 		return ResponseEntity.ok(new GenericResponse("User Deleted!"));
 	}
-	
+	/*
+	 * http://localhost:8080/api/v1/getUser/slice?page=1&size=3
+	 */
 	@GetMapping(path = "/v1/getUser/slice")
 	public ResponseEntity<List<UserViewDTO>> userSlice(Pageable pageable){
 		final List<UserViewDTO> users = userService.userSlice(pageable);
