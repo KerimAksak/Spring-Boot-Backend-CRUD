@@ -2,6 +2,8 @@ package com.tutorial.backend.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +42,7 @@ public class UserAPI {
 	}
 	
 	@PostMapping(path="/v1/createuser")
-	public ResponseEntity<?> createUser(@RequestBody UserCreateDTO userCreateDTO){
+	public ResponseEntity<?> createUser(@Valid @RequestBody UserCreateDTO userCreateDTO){
 		userService.createUser(userCreateDTO);	
 		return ResponseEntity.ok(new GenericResponse("Registration Successful"));
 	}
@@ -51,7 +53,7 @@ public class UserAPI {
 	}
 
 	@PutMapping(path = "/v1/userUpdate/{id}")
-	public ResponseEntity<UserViewDTO> userUpdate(@PathVariable("id") Long id, 
+	public ResponseEntity<UserViewDTO> userUpdate(@Valid @PathVariable("id") Long id, 
 			@RequestBody UserUpdateDTO UserUpdateDTO) throws NotFoundException{
 		return ResponseEntity.ok(userService.updateUser(id, UserUpdateDTO));
 	}
