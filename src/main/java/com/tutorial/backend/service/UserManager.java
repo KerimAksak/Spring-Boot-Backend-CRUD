@@ -38,7 +38,7 @@ public class UserManager implements UserService {
 	@Override
 	public UserViewDTO createUser(UserCreateDTO userCreateDTO) {
 		final User user = userRepository
-				.save(new User(userCreateDTO.getFirstName(), userCreateDTO.getLastName()));
+				.save(new User(userCreateDTO.getUserName(), userCreateDTO.getFirstName(), userCreateDTO.getLastName()));
 		return UserViewDTO.of(user);
 	}
 
