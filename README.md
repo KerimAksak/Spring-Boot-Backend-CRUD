@@ -8,8 +8,8 @@ CRUD operations valid for a user are defined. In addition, some validation proce
 
 ### Endpoints in the project
 
-![1](1.png)
+![1](https://raw.githubusercontent.com/KerimAksak/backend/master/img/1.jpg?token=AMFVIYMLG236CC2ADZQTAJ3BCV4SI)
 
 ### H2D
 
-![2](2.png)
+![2](https://raw.githubusercontent.com/KerimAksak/backend/master/img/2.jpg?token=AMFVIYKCMT6XT3ORY5NRKG3BCV4SM)
