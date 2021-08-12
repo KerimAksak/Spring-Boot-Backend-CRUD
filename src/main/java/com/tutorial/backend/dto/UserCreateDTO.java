@@ -8,6 +8,11 @@ import lombok.Data;
 @Data
 public final class UserCreateDTO {
 	
+	@NotNull(message = "{backend.validation.constraints.username.NotNull.message}")
+	@Size(min = 4, max = 32, 
+			message = "{backend.validation.constraints.username.Size.message}")
+	private String userName;
+	
 	@NotNull(message = "{backend.validation.constraints.firstname.NotNull.message}")
 	@Size(min = 4, max = 32, 
 			message = "{backend.validation.constraints.firstname.Size.message}")

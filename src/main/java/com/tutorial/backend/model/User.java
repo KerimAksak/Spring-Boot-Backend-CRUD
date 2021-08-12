@@ -16,8 +16,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User {
 	
-	public User(String firstName, String lastName) {
+	public User(String userName, String firstName, String lastName) {
 		super();
+		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -25,6 +26,9 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "user_name", nullable = false, length = 50, unique = true)
+	private String userName;
 	
 	@Column(name = "first_name", nullable = false, length = 50)
 	private String firstName;
