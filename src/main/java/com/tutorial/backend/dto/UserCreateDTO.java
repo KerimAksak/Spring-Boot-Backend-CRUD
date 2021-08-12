@@ -3,6 +3,8 @@ package com.tutorial.backend.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.tutorial.backend.validator.UniqueUserName;
+
 import lombok.Data;
 
 @Data
@@ -11,6 +13,7 @@ public final class UserCreateDTO {
 	@NotNull(message = "{backend.validation.constraints.username.NotNull.message}")
 	@Size(min = 4, max = 32, 
 			message = "{backend.validation.constraints.username.Size.message}")
+	@UniqueUserName
 	private String userName;
 	
 	@NotNull(message = "{backend.validation.constraints.firstname.NotNull.message}")

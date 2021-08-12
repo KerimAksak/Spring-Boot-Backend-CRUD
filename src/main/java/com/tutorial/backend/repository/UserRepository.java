@@ -8,4 +8,6 @@ import com.tutorial.backend.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	boolean existsUserByUserName(String userName);
+
 }
